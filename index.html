@@ -1532,10 +1532,11 @@
             <div class="check-with-action">
               <button class="check-item" type="button" data-check-id="python">
                 <span class="check-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M7 16.5l6.2 6.1L25 9.5"/></svg></span>
-                <span><strong>Python 설치 여부 확인</strong><small>설치되어 있으면 바로 통과합니다. 없거나 버전이 낮으면 공통 Step 2에서 설치합니다.</small></span>
+                <span><strong>Python 설치 확인</strong><small>Codex가 먼저 설치 여부를 확인합니다. 자동 설치가 막히면 수동 설치 가이드로 진행합니다.</small></span>
               </button>
               <div class="check-actions">
-                <button class="check-action" type="button" data-open-python-install>설치 진행하기</button>
+                <button class="check-action" type="button" data-open-python-codex>Codex에게 확인 요청</button>
+                <button class="check-action secondary" type="button" data-open-python-install>수동 설치 가이드</button>
               </div>
             </div>
             <div class="check-with-action">
@@ -1554,10 +1555,6 @@
             <a href="#common-setup" id="setupJump">공통 세팅으로 이동</a>
           </div>
         </div>
-        <div class="code-block reveal">
-          <div class="code-head"><span>Python 설치 확인</span><button class="copy-btn" type="button" data-copy>복사</button></div>
-          <pre><code>python --version</code></pre>
-        </div>
       </section>
 
       <section id="common-setup" class="section" data-section>
@@ -1567,7 +1564,7 @@
           <p>두 트랙 모두 같은 시작점을 사용합니다. Python을 확인하고, Google Drive ZIP을 내려받아 푼 뒤, Codex 데스크톱 앱에서 기존 폴더를 연결합니다.</p>
         </div>
         <div class="step-list">
-          <article id="python-install-step" class="step-card reveal">
+          <article class="step-card reveal">
             <div class="step-number" data-count="1">1</div>
             <div class="step-body">
               <h3>Codex 데스크톱 앱 설치</h3>
@@ -1580,17 +1577,29 @@
             </div>
           </article>
 
-          <article class="step-card reveal">
+          <article id="python-install-step" class="step-card reveal">
             <div class="step-number" data-count="2">2</div>
             <div class="step-body">
-              <h3>Python 설치 여부 확인 및 설치</h3>
-              <p class="step-intent">이미 설치되어 있으면 통과하고, 없거나 버전이 낮으면 가장 쉬운 공식 설치 경로로 진행합니다.</p>
+              <h3>Python 설치 확인 및 설치</h3>
+              <p class="step-intent">Codex에게 먼저 설치 여부를 확인시키고, 가능한 경우 설치까지 안내받습니다. 자동 설치가 막히면 수동 설치 가이드로 진행합니다.</p>
               <div class="step-meta">
-                <div><h4>먼저 확인</h4><ol><li>Windows는 PowerShell 또는 명령 프롬프트를 엽니다.</li><li>macOS는 Terminal을 엽니다.</li><li>아래 확인 명령을 실행합니다.</li><li>`Python 3.10` 이상이 보이면 이 단계는 통과합니다.</li></ol></div>
-                <div class="code-block"><div class="code-head"><span>Windows 확인</span><button class="copy-btn" type="button" data-copy>복사</button></div><pre><code>python --version</code></pre></div>
-                <div class="code-block"><div class="code-head"><span>macOS 확인</span><button class="copy-btn" type="button" data-copy>복사</button></div><pre><code>python3 --version</code></pre></div>
+                <div><h4>권장 흐름</h4><ol><li>아래 프롬프트를 Codex 채팅창에 붙여넣습니다.</li><li>Codex가 OS와 Python 버전을 확인합니다.</li><li>Python 3.10 이상이면 설치 단계를 건너뜁니다.</li><li>설치가 필요하면 Codex가 자동 설치 가능 여부를 판단하고, 실행 전 승인을 요청합니다.</li><li>자동 설치가 막히면 아래 수동 설치 가이드를 펼쳐 진행합니다.</li></ol></div>
+                <div id="python-codex-prompt" class="code-block"><div class="code-head"><span>Codex Python 확인/설치 프롬프트</span><button class="copy-btn" type="button" data-copy>복사</button></div><pre><code>내 PC에 Python 3.10 이상이 설치되어 있는지 먼저 확인해줘.
+
+진행 방식:
+1. OS가 Windows인지 macOS인지 확인해줘.
+2. Python 버전을 확인하는 명령어를 실행해줘.
+   - Windows: python --version
+   - macOS: python3 --version
+3. Python 3.10 이상이면 설치 단계는 건너뛰고 다음 단계로 넘어가도 된다고 알려줘.
+4. Python이 없거나 버전이 낮으면, 내 PC에서 자동 설치가 가능한지 먼저 판단해줘.
+   - Windows에서는 winget 사용 가능 여부를 확인하고, 가능하면 공식 Python 패키지 설치 명령을 제안해줘.
+   - macOS에서는 Homebrew 사용 가능 여부를 확인하고, 가능하면 brew install python을 제안해줘.
+5. 설치 명령은 실행 전에 반드시 나에게 설명하고 승인을 받아줘.
+6. 설치가 끝나면 새 터미널이 필요한지 알려주고, 다시 Python 버전을 확인해줘.
+7. 자동 설치가 불가능하거나 관리자 권한/회사 보안 정책 때문에 막히면 멈추고, 수동 설치 가이드로 진행하라고 알려줘.</code></pre></div>
                 <details id="python-install-details" class="install-details">
-                  <summary>Python이 없거나 버전이 낮을 때 설치 방법 보기</summary>
+                  <summary>자동 설치가 안 될 때 수동 설치 방법 보기</summary>
                   <div class="install-details-body">
                     <div><h4>Windows 설치</h4><ol><li><a href="https://www.python.org/downloads/" target="_blank" rel="noreferrer">python.org/downloads</a>에 접속합니다.</li><li>Download Python 버튼을 눌러 설치 파일을 받습니다.</li><li>설치 첫 화면에서 <strong>Add python.exe to PATH</strong>를 반드시 체크합니다.</li><li>Install Now를 클릭하고 설치를 끝냅니다.</li><li>새 PowerShell 또는 명령 프롬프트를 열고 `python --version`을 다시 실행합니다.</li></ol></div>
                     <div><h4>macOS 설치</h4><ol><li><a href="https://www.python.org/downloads/macos/" target="_blank" rel="noreferrer">Python macOS 다운로드</a> 페이지에 접속합니다.</li><li>최신 Python 3 설치용 macOS installer를 다운로드합니다.</li><li>다운로드한 `.pkg` 파일을 실행하고 기본 안내대로 설치합니다.</li><li>새 Terminal을 열고 `python3 --version`을 다시 실행합니다.</li></ol></div>
@@ -1598,7 +1607,7 @@
                   </div>
                 </details>
                 <div><span class="success">성공 기준:</span> `Python 3.10` 이상 버전이 표시됩니다.</div>
-                <div><span class="mistake">자주 하는 실수:</span> Windows에서 Add python.exe to PATH를 체크하지 않으면 `python` 명령이 인식되지 않습니다.</div>
+                <div><span class="mistake">자주 하는 실수:</span> 자동 설치가 막혔는데 같은 명령을 반복하지 않습니다. 그때는 수동 설치 가이드로 전환합니다.</div>
               </div>
             </div>
           </article>
@@ -1674,10 +1683,11 @@
             <div class="step-number" data-count="8">8</div>
             <div class="step-body">
               <h3>README 기반 환경 세팅 요청</h3>
-              <p class="step-intent">Codex 채팅에 복붙 프롬프트를 넣고, 가상환경 생성부터 로컬 웹 실행까지 안내받습니다.</p>
+              <p class="step-intent">Step 2에서 Python 3.10 이상 확인을 마친 뒤, Codex 채팅에 복붙 프롬프트를 넣고 가상환경 생성부터 로컬 웹 실행까지 안내받습니다.</p>
               <div class="step-meta">
-                <div><h4>절차</h4><ol><li>아래 프롬프트를 Codex 채팅창에 붙여넣습니다.</li><li>Codex가 제시하는 단계마다 명령어를 확인하고 승인합니다.</li><li>API Key가 아직 없으면 `.env` 입력은 건너뛰고 Mock 모드로 먼저 실행합니다.</li></ol></div>
-                <div class="code-block"><div class="code-head"><span>Codex 채팅 프롬프트</span><button class="copy-btn" type="button" data-copy>복사</button></div><pre><code>이 프로젝트는 처음 사용해. README.md, CLAUDE.md, AGENTS.md를 먼저 읽고,
+                <div><h4>절차</h4><ol><li>Step 2에서 Python 확인이 끝났는지 먼저 확인합니다.</li><li>아래 프롬프트를 Codex 채팅창에 붙여넣습니다.</li><li>Codex가 제시하는 단계마다 명령어를 확인하고 승인합니다.</li><li>API Key가 아직 없으면 `.env` 입력은 건너뛰고 Mock 모드로 먼저 실행합니다.</li></ol></div>
+                <div class="code-block"><div class="code-head"><span>Codex 채팅 프롬프트</span><button class="copy-btn" type="button" data-copy>복사</button></div><pre><code>Python 3.10 이상 확인은 끝난 상태야.
+이 프로젝트는 처음 사용해. README.md, CLAUDE.md, AGENTS.md를 먼저 읽고,
 아래 순서대로 단계별로 진행해줘. 각 단계의 명령어를 보여주고 내 승인을
 받은 뒤 실행해줘. 오류가 나면 즉시 멈추고 원인을 알려줘.
 
@@ -1878,7 +1888,7 @@ python src/policy_agent.py fix --topic "상품 상세"</code></pre>
         <div class="faq-list reveal" id="faqList">
           <article class="faq-item">
             <button class="faq-question" type="button" aria-expanded="false"><span>`python --version`이 인식되지 않습니다</span><span class="faq-icon" aria-hidden="true">+</span></button>
-            <div class="faq-answer"><div><p>Python 설치 시 Add Python to PATH를 체크하지 않았을 가능성이 큽니다. Python을 다시 설치하면서 해당 옵션을 체크합니다.</p></div></div>
+            <div class="faq-answer"><div><p>먼저 Step 2의 Codex Python 확인/설치 프롬프트를 실행합니다. 자동 설치가 막히면 수동 설치 가이드를 펼쳐 진행하고, Windows에서는 Add python.exe to PATH 체크 여부를 확인합니다.</p></div></div>
           </article>
           <article class="faq-item">
             <button class="faq-question" type="button" aria-expanded="false"><span>Codex 로그인 후 사용할 수 없다고 나옵니다</span><span class="faq-icon" aria-hidden="true">+</span></button>
@@ -2096,26 +2106,33 @@ python src/policy_agent.py fix --topic "상품 상세"</code></pre>
       }
 
       function setupStepLinks() {
-        const openPythonInstallDetails = () => {
+        const goToPythonStep = (openDetails) => {
           const step = $("#python-install-step");
           const details = $("#python-install-details");
-          if (details) details.setAttribute("open", "");
+          if (details) {
+            if (openDetails) {
+              details.setAttribute("open", "");
+            } else {
+              details.removeAttribute("open");
+            }
+          }
           return step;
         };
         document.addEventListener("click", (event) => {
-          const link = event.target.closest("[data-open-python-install]");
-          if (!link) return;
+          const installLink = event.target.closest("[data-open-python-install]");
+          const codexLink = event.target.closest("[data-open-python-codex]");
+          if (!installLink && !codexLink) return;
           event.preventDefault();
-          const step = openPythonInstallDetails();
+          const step = goToPythonStep(Boolean(installLink));
           if (step) {
             history.pushState(null, "", "#python-install-step");
             step.scrollIntoView({ behavior: "smooth", block: "start" });
           }
         });
         window.addEventListener("hashchange", () => {
-          if (window.location.hash === "#python-install-step") openPythonInstallDetails();
+          if (window.location.hash === "#python-install-step") goToPythonStep(false);
         });
-        if (window.location.hash === "#python-install-step") openPythonInstallDetails();
+        if (window.location.hash === "#python-install-step") goToPythonStep(false);
       }
 
       function setupReveal() {
