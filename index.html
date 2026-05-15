@@ -975,6 +975,7 @@
       border-radius: 12px;
       background: #fbfefd;
       overflow: hidden;
+      scroll-margin-top: 1rem;
     }
 
     .install-details summary {
@@ -2116,23 +2117,25 @@ python src/policy_agent.py fix --topic "상품 상세"</code></pre>
               details.removeAttribute("open");
             }
           }
-          return step;
+          return openDetails && details ? details : step;
         };
         document.addEventListener("click", (event) => {
           const installLink = event.target.closest("[data-open-python-install]");
           const codexLink = event.target.closest("[data-open-python-codex]");
           if (!installLink && !codexLink) return;
           event.preventDefault();
-          const step = goToPythonStep(Boolean(installLink));
-          if (step) {
-            history.pushState(null, "", "#python-install-step");
-            step.scrollIntoView({ behavior: "smooth", block: "start" });
+          const target = goToPythonStep(Boolean(installLink));
+          if (target) {
+            history.pushState(null, "", installLink ? "#python-install-details" : "#python-install-step");
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
           }
         });
         window.addEventListener("hashchange", () => {
           if (window.location.hash === "#python-install-step") goToPythonStep(false);
+          if (window.location.hash === "#python-install-details") goToPythonStep(true);
         });
         if (window.location.hash === "#python-install-step") goToPythonStep(false);
+        if (window.location.hash === "#python-install-details") goToPythonStep(true);
       }
 
       function setupReveal() {
