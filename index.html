@@ -1457,7 +1457,7 @@
           <div class="hero-metrics" aria-label="가이드 핵심 정보">
             <div class="metric"><strong>1</strong><span>단일 HTML 파일</span></div>
             <div class="metric"><strong>2</strong><span>웹 개발과 정책서 생성 트랙</span></div>
-            <div class="metric"><strong>8</strong><span>공통 세팅 단계</span></div>
+            <div class="metric"><strong>7</strong><span>공통 세팅 단계</span></div>
           </div>
         </div>
       </section>
@@ -1561,7 +1561,7 @@
       <section id="common-setup" class="section" data-section>
         <div class="section-head reveal">
           <p class="eyebrow">Section 2</p>
-          <h2>공통 세팅 Step 1-8</h2>
+          <h2>공통 세팅 Step 1-7</h2>
           <p>두 트랙 모두 같은 시작점을 사용합니다. Python을 확인하고, Google Drive ZIP을 내려받아 푼 뒤, Codex 데스크톱 앱에서 기존 폴더를 연결합니다.</p>
         </div>
         <div class="step-list">
@@ -1572,7 +1572,7 @@
               <p class="step-intent">설치, ChatGPT 로그인, 파일·터미널 권한 허용을 완료합니다.</p>
               <div class="step-meta">
                 <div><h4>절차</h4><ol><li><a href="https://chatgpt.com/codex" target="_blank" rel="noreferrer">chatgpt.com/codex</a>에 접속합니다.</li><li>Windows 또는 Mac 설치 파일을 다운로드해 실행합니다.</li><li>ChatGPT 계정으로 로그인합니다.</li><li>파일 접근과 터미널 접근 권한을 허용합니다.</li></ol></div>
-                <div><span class="success">성공 기준:</span> 첫 화면에 New Project 버튼이 보입니다.</div>
+                <div><span class="success">성공 기준:</span> Codex 데스크톱 앱 첫 화면 또는 프로젝트 목록이 보입니다.</div>
                 <div><span class="mistake">자주 하는 실수:</span> 회사 계정 등급이 Codex 사용을 지원하지 않을 수 있습니다.</div>
               </div>
             </div>
@@ -1657,12 +1657,12 @@
           <article class="step-card reveal">
             <div class="step-number" data-count="6">6</div>
             <div class="step-body">
-              <h3>Codex에서 새 프로젝트 생성</h3>
-              <p class="step-intent">Codex 데스크톱 앱에 ncstudio 프로젝트를 등록합니다.</p>
+              <h3>Codex에서 기존 폴더 사용</h3>
+              <p class="step-intent">압축 해제한 ncstudio 폴더를 Codex 작업공간으로 바로 엽니다.</p>
               <div class="step-meta">
-                <div><h4>절차</h4><ol><li>Codex 데스크톱 앱을 실행합니다.</li><li>New Project를 클릭합니다.</li><li>프로젝트 이름을 `ncstudio`로 입력합니다.</li></ol></div>
-                <div><span class="success">성공 기준:</span> 폴더 선택 다이얼로그가 표시됩니다.</div>
-                <div><span class="mistake">자주 하는 실수:</span> Create from scratch를 누르지 말고 기존 폴더 열기로 진행합니다.</div>
+                <div><h4>절차</h4><ol><li>Codex 데스크톱 앱을 실행합니다.</li><li>좌측 프로젝트 영역의 `+` 또는 폴더 추가 버튼을 클릭합니다.</li><li>메뉴에서 `기존 폴더 사용`을 선택합니다.</li><li>Windows는 `C:\project\ncstudio`, macOS는 `~/project/ncstudio` 폴더를 선택합니다.</li><li>신뢰 또는 권한 확인이 나오면 허용합니다.</li></ol></div>
+                <div><span class="success">성공 기준:</span> 좌측 프로젝트 목록 또는 파일 트리에 `ncstudio`가 보입니다.</div>
+                <div><span class="mistake">자주 하는 실수:</span> `처음부터 시작`을 누르지 않습니다. ZIP 파일이나 상위 폴더가 아니라 압축 해제된 `ncstudio` 폴더를 선택합니다.</div>
               </div>
             </div>
           </article>
@@ -1670,23 +1670,10 @@
           <article class="step-card reveal">
             <div class="step-number" data-count="7">7</div>
             <div class="step-body">
-              <h3>기존 로컬 폴더 연결</h3>
-              <p class="step-intent">압축 해제한 저장소 폴더를 Codex 작업공간으로 연결합니다.</p>
-              <div class="step-meta">
-                <div><h4>절차</h4><ol><li>Open existing folder를 선택합니다.</li><li>`C:\project\ncstudio`를 선택합니다.</li><li>Trust this folder가 나오면 Yes를 누릅니다.</li></ol></div>
-                <div><span class="success">성공 기준:</span> 좌측에 파일 트리가 표시됩니다.</div>
-                <div><span class="mistake">자주 하는 실수:</span> 상위 폴더인 `C:\project`를 선택하지 않습니다.</div>
-              </div>
-            </div>
-          </article>
-
-          <article class="step-card reveal">
-            <div class="step-number" data-count="8">8</div>
-            <div class="step-body">
               <h3>README 기반 환경 세팅 요청</h3>
-              <p class="step-intent">Step 2에서 Python 3.10 이상 확인을 마친 뒤, Codex 채팅에 복붙 프롬프트를 넣고 가상환경 생성부터 로컬 웹 실행까지 안내받습니다.</p>
+              <p class="step-intent">Step 2에서 Python 3.10 이상 확인을 마치고 Step 6에서 기존 폴더 연결이 끝난 뒤, Codex 채팅에 복붙 프롬프트를 넣고 가상환경 생성부터 로컬 웹 실행까지 안내받습니다.</p>
               <div class="step-meta">
-                <div><h4>절차</h4><ol><li>Step 2에서 Python 확인이 끝났는지 먼저 확인합니다.</li><li>아래 프롬프트를 Codex 채팅창에 붙여넣습니다.</li><li>Codex가 제시하는 단계마다 명령어를 확인하고 승인합니다.</li><li>API Key가 아직 없으면 `.env` 입력은 건너뛰고 Mock 모드로 먼저 실행합니다.</li></ol></div>
+                <div><h4>절차</h4><ol><li>Step 2에서 Python 확인이 끝났는지 먼저 확인합니다.</li><li>Step 6에서 `ncstudio` 폴더가 Codex에 열려 있는지 확인합니다.</li><li>아래 프롬프트를 Codex 채팅창에 붙여넣습니다.</li><li>Codex가 제시하는 단계마다 명령어를 확인하고 승인합니다.</li><li>API Key가 아직 없으면 `.env` 입력은 건너뛰고 Mock 모드로 먼저 실행합니다.</li></ol></div>
                 <div class="code-block"><div class="code-head"><span>Codex 채팅 프롬프트</span><button class="copy-btn" type="button" data-copy>복사</button></div><pre><code>Python 3.10 이상 확인은 끝난 상태야.
 이 프로젝트는 처음 사용해. README.md, CLAUDE.md, AGENTS.md를 먼저 읽고,
 아래 순서대로 단계별로 진행해줘. 각 단계의 명령어를 보여주고 내 승인을
@@ -2119,16 +2106,26 @@ python src/policy_agent.py fix --topic "상품 상세"</code></pre>
           }
           return openDetails && details ? details : step;
         };
+        const handlePythonStepLink = (event, openDetails) => {
+          event.preventDefault();
+          event.stopPropagation();
+          const target = goToPythonStep(openDetails);
+          if (target) {
+            history.pushState(null, "", openDetails ? "#python-install-details" : "#python-install-step");
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        };
+        $$("[data-open-python-install]").forEach((button) => {
+          button.addEventListener("click", (event) => handlePythonStepLink(event, true));
+        });
+        $$("[data-open-python-codex]").forEach((button) => {
+          button.addEventListener("click", (event) => handlePythonStepLink(event, false));
+        });
         document.addEventListener("click", (event) => {
           const installLink = event.target.closest("[data-open-python-install]");
           const codexLink = event.target.closest("[data-open-python-codex]");
           if (!installLink && !codexLink) return;
-          event.preventDefault();
-          const target = goToPythonStep(Boolean(installLink));
-          if (target) {
-            history.pushState(null, "", installLink ? "#python-install-details" : "#python-install-step");
-            target.scrollIntoView({ behavior: "smooth", block: "start" });
-          }
+          handlePythonStepLink(event, Boolean(installLink));
         });
         window.addEventListener("hashchange", () => {
           if (window.location.hash === "#python-install-step") goToPythonStep(false);
